@@ -59,7 +59,7 @@ Answer questions about DTEC's services, programs, coworking spaces, events, comp
 export async function getChatCompletion(messages: Array<{ role: string; content: string }>): Promise<string> {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
@@ -70,7 +70,7 @@ export async function getChatCompletion(messages: Array<{ role: string; content:
           content: msg.content,
         })),
       ],
-      max_tokens: 8192,
+      max_tokens: 4096,
     });
 
     return response.choices[0].message.content || "I apologize, but I couldn't generate a response. Please try again.";
@@ -86,7 +86,7 @@ export async function streamChatCompletion(
 ): Promise<void> {
   try {
     const stream = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
@@ -97,7 +97,7 @@ export async function streamChatCompletion(
           content: msg.content,
         })),
       ],
-      max_tokens: 8192,
+      max_tokens: 4096,
       stream: true,
     });
 
