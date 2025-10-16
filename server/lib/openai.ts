@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 
 // This blueprint is from javascript_openai integration
-// the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+// Using gpt-4o which is the latest available model with proper access
 
 // This is using OpenAI's API, which points to OpenAI's API servers and requires your own API key.
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -59,7 +59,7 @@ Answer questions about DTEC's services, programs, coworking spaces, events, comp
 export async function getChatCompletion(messages: Array<{ role: string; content: string }>): Promise<string> {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-5",
+      model: "gpt-4o",
       messages: [
         {
           role: "system",
@@ -70,7 +70,7 @@ export async function getChatCompletion(messages: Array<{ role: string; content:
           content: msg.content,
         })),
       ],
-      max_completion_tokens: 8192,
+      max_tokens: 8192,
     });
 
     return response.choices[0].message.content || "I apologize, but I couldn't generate a response. Please try again.";
@@ -86,7 +86,7 @@ export async function streamChatCompletion(
 ): Promise<void> {
   try {
     const stream = await openai.chat.completions.create({
-      model: "gpt-5",
+      model: "gpt-4o",
       messages: [
         {
           role: "system",
@@ -97,7 +97,7 @@ export async function streamChatCompletion(
           content: msg.content,
         })),
       ],
-      max_completion_tokens: 8192,
+      max_tokens: 8192,
       stream: true,
     });
 
