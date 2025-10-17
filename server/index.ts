@@ -64,9 +64,9 @@ app.use((req, res, next) => {
   const port = parseInt(process.env.PORT || '5000', 10);
   server.listen({
     port,
-    host: "127.0.0.1",
-    // reusePort: true,
+    host: "0.0.0.0", // ✅ Must be 0.0.0.0 for Render
   }, () => {
-    log(`serving on port http://127.0.0.1:${port}`);
+    log(`🚀 Server running on http://0.0.0.0:${port}`);
   });
+  
 })();
