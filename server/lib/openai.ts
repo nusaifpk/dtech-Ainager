@@ -1,10 +1,14 @@
 import OpenAI from "openai";
 
-// This blueprint is from javascript_openai integration
-// Using gpt-4o which is the latest available model with proper access
+const apiKey = process.env.OPENAI_API_KEY;
 
-// This is using OpenAI's API, which points to OpenAI's API servers and requires your own API key.
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+if (!apiKey) {
+  console.error("OPENAI_API_KEY is not set in environment variables");
+  console.error("Available env vars:", Object.keys(process.env).filter(k => k.includes('OPENAI')));
+  throw new Error("OPENAI_API_KEY environment variable is required");
+}
+
+const openai = new OpenAI({ apiKey });
 
 // DTEC knowledge base for context
 const DTEC_CONTEXT = `You are an AI assistant for DTEC (Dubai Technology Entrepreneur Campus), the largest tech startup coworking campus in the Middle East.
